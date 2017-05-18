@@ -1,0 +1,225 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<link href="~/css/site.css" rel="stylesheet" />
+    <div id="numberPad">
+        <div class="distanceTop"></div><label id="instructions">Ange adress (t ex Y14)</label> <div class="distanceTop"></div>
+        <div class="distance"></div><label id="numberInput"></label> <div class="distance"><img src="~/images/erase.png" id="eraser"/> </div>
+    <div class="buttonGroup">
+        <button class="button">1</button>
+        <button class="button">2</button>
+        <button class="button">3</button>
+        <button class="button">4</button>
+        <button class="button">5</button>
+        <button class="button">6</button>
+        <button class="button">7</button>
+        <button class="button">8</button>
+        <button class="button">9</button>
+        <button class="button">Y</button>
+        <button class="button">0</button>
+        <button class="button">H</button>
+        <button id="inv_1" class="button">0</button>
+        <button id="check"> <img id="checkMark"src="~/images/ok.png" /></button>
+        <button id="inv_2"class="button">H</button>
+    </div>
+</div>
+    <div id="wrapper">
+        <div class="left"><img src="~/images/Datum.png"></div>
+        <div class="date"><img src="~/images/1.png"></div>
+        <div class="date"><img src="~/images/2.png"></div>
+        <div class="date"><img src="~/images/3.png"></div>
+        <div class="date"><img src="~/images/4.png"></div>
+        <div class="date"><img src="~/images/5.png"></div>
+        <div class="date"><img src="~/images/6.png"></div>
+        <div class="date"><img src="~/images/7.png"></div>
+        <div class="date"><img src="~/images/8.png"></div>
+        <div class="date"><img src="~/images/9.png" /></div>
+        <div class="date"><img src="~/images/10.png" /></div>
+        <div class="date"><img src="~/images/11.png" /></div>
+        <div class="date"><img src="~/images/12.png" /></div>
+        <div class="date"><img src="~/images/13.png" /></div>
+        <div class="date"><img src="~/images/14.png" /></div>
+        <div class="date"><img src="~/images/15.png" /></div>
+        <div class="date"><img src="~/images/16.png" /></div>
+        <div class="date"><img src="~/images/17.png" /></div>
+        <div class="date"><img src="~/images/18.png" /></div>
+        <div class="date"><img src="~/images/19.png" /></div>
+        <div class="date"><img src="~/images/20.png" /></div>
+        <div class="date"><img src="~/images/21.png" /></div>
+        <div class="date"><img src="~/images/22.png" /></div>
+        <div class="date"><img src="~/images/23.png" /></div>
+        <div class="date"><img src="~/images/24.png" /></div>
+        <div class="date"><img src="~/images/25.png" /></div>
+        <div class="date"><img src="~/images/26.png" /></div>
+        <div class="date"><img src="~/images/27.png" /></div>
+        <div class="date"><img src="~/images/28.png" /></div>
+        <div class="date"><img src="~/images/29.png" /></div>
+        <div class="date"><img src="~/images/30.png" /></div>
+        <div class="date"><img src="~/images/31.png"></div>
+        <div class="left"><img src="~/images/tur1.png" /></div>
+        <div class="time" id="ID_1_01"></div>
+        <div class="time" id="ID_1_02"></div>
+        <div class="time" id="ID_1_03"></div>
+        <div class="time" id="ID_1_04"></div>
+        <div class="time" id="ID_1_05"></div>
+        <div class="time" id="ID_1_06"></div>
+        <div class="time" id="ID_1_07"></div>
+        <div class="time" id="ID_1_08"></div>
+        <div class="time" id="ID_1_09"></div>
+        <div class="time" id="ID_1_10"></div>
+        <div class="time" id="ID_1_11"></div>
+        <div class="time" id="ID_1_12"></div>
+        <div class="time" id="ID_1_13"></div>
+        <div class="time" id="ID_1_14"></div>
+        <div class="time" id="ID_1_15"></div>
+        <div class="time" id="ID_1_16"></div>
+        <div class="time" id="ID_1_17"></div>
+        <div class="time" id="ID_1_18"></div>
+        <div class="time" id="ID_1_19"></div>
+        <div class="time" id="ID_1_20"></div>
+        <div class="time" id="ID_1_21"></div>
+        <div class="time" id="ID_1_22"></div>
+        <div class="time" id="ID_1_23"></div>
+        <div class="time" id="ID_1_24"></div>
+        <div class="time" id="ID_1_25"></div>
+        <div class="time" id="ID_1_26"></div>
+        <div class="time" id="ID_1_27"></div>
+        <div class="time" id="ID_1_28"></div>
+        <div class="time" id="ID_1_29"></div>
+        <div class="time" id="ID_1_30"></div>
+        <div class="time" id="ID_1_31"></div>
+        <div class="left"><img src="~/images/tur2.png" /></div>
+        <div class="time" id="ID_2_01"></div>
+        <div class="time" id="ID_2_02"></div>
+        <div class="time" id="ID_2_03"></div>
+        <div class="time" id="ID_2_04"></div>
+        <div class="time" id="ID_2_05"></div>
+        <div class="time" id="ID_2_06"></div>
+        <div class="time" id="ID_2_07"></div>
+        <div class="time" id="ID_2_08"></div>
+        <div class="time" id="ID_2_09"></div>
+        <div class="time" id="ID_2_10"></div>
+        <div class="time" id="ID_2_11"></div>
+        <div class="time" id="ID_2_12"></div>
+        <div class="time" id="ID_2_13"></div>
+        <div class="time" id="ID_2_14"></div>
+        <div class="time" id="ID_2_15"></div>
+        <div class="time" id="ID_2_16"></div>
+        <div class="time" id="ID_2_17"></div>
+        <div class="time" id="ID_2_18"></div>
+        <div class="time" id="ID_2_19"></div>
+        <div class="time" id="ID_2_20"></div>
+        <div class="time" id="ID_2_21"></div>
+        <div class="time" id="ID_2_22"></div>
+        <div class="time" id="ID_2_23"></div>
+        <div class="time" id="ID_2_24"></div>
+        <div class="time" id="ID_2_25"></div>
+        <div class="time" id="ID_2_26"></div>
+        <div class="time" id="ID_2_27"></div>
+        <div class="time" id="ID_2_28"></div>
+        <div class="time" id="ID_2_29"></div>
+        <div class="time" id="ID_2_30"></div>
+        <div class="time" id="ID_2_31"></div>
+        <div class="left"><img src="~/images/tur3.png" /></div>
+        <div class="time" id="ID_3_01"></div>
+        <div class="time" id="ID_3_02"></div>
+        <div class="time" id="ID_3_03"></div>
+        <div class="time" id="ID_3_04"></div>
+        <div class="time" id="ID_3_05"></div>
+        <div class="time" id="ID_3_06"></div>
+        <div class="time" id="ID_3_07"></div>
+        <div class="time" id="ID_3_08"></div>
+        <div class="time" id="ID_3_09"></div>
+        <div class="time" id="ID_3_10"></div>
+        <div class="time" id="ID_3_11"></div>
+        <div class="time" id="ID_3_12"></div>
+        <div class="time" id="ID_3_13"></div>
+        <div class="time" id="ID_3_14"></div>
+        <div class="time" id="ID_3_15"></div>
+        <div class="time" id="ID_3_16"></div>
+        <div class="time" id="ID_3_17"></div>
+        <div class="time" id="ID_3_18"></div>
+        <div class="time" id="ID_3_19"></div>
+        <div class="time" id="ID_3_20"></div>
+        <div class="time" id="ID_3_21"></div>
+        <div class="time" id="ID_3_22"></div>
+        <div class="time" id="ID_3_23"></div>
+        <div class="time" id="ID_3_24"></div>
+        <div class="time" id="ID_3_25"></div>
+        <div class="time" id="ID_3_26"></div>
+        <div class="time" id="ID_3_27"></div>
+        <div class="time" id="ID_3_28"></div>
+        <div class="time" id="ID_3_29"></div>
+        <div class="time" id="ID_3_30"></div>
+        <div class="time" id="ID_3_31"></div>
+        <div class="left"><img src="~/images/tur4.png" />&nbsp</div>
+        <div class="time" id="ID_4_01"></div>
+        <div class="time" id="ID_4_02"></div>
+        <div class="time" id="ID_4_03"></div>
+        <div class="time" id="ID_4_04"></div>
+        <div class="time" id="ID_4_05"></div>
+        <div class="time" id="ID_4_06"></div>
+        <div class="time" id="ID_4_07"></div>
+        <div class="time" id="ID_4_08"></div>
+        <div class="time" id="ID_4_09"></div>
+        <div class="time" id="ID_4_10"></div>
+        <div class="time" id="ID_4_11"></div>
+        <div class="time" id="ID_4_12"></div>
+        <div class="time" id="ID_4_13"></div>
+        <div class="time" id="ID_4_14"></div>
+        <div class="time" id="ID_4_15"></div>
+        <div class="time" id="ID_4_16"></div>
+        <div class="time" id="ID_4_17"></div>
+        <div class="time" id="ID_4_18"></div>
+        <div class="time" id="ID_4_19"></div>
+        <div class="time" id="ID_4_20"></div>
+        <div class="time" id="ID_4_21"></div>
+        <div class="time" id="ID_4_22"></div>
+        <div class="time" id="ID_4_23"></div>
+        <div class="time" id="ID_4_24"></div>
+        <div class="time" id="ID_4_25"></div>
+        <div class="time" id="ID_4_26"></div>
+        <div class="time" id="ID_4_27"></div>
+        <div class="time" id="ID_4_28"></div>
+        <div class="time" id="ID_4_29"></div>
+        <div class="time" id="ID_4_30"></div>
+        <div class="time" id="ID_4_31"></div>
+        <div class="left"><img src="~/images/tur5.png" />&nbsp</div>
+        <div class="time" id="ID_5_01"></div>
+        <div class="time" id="ID_5_02"></div>
+        <div class="time" id="ID_5_03"></div>
+        <div class="time" id="ID_5_04"></div>
+        <div class="time" id="ID_5_05"></div>
+        <div class="time" id="ID_5_06"></div>
+        <div class="time" id="ID_5_07"></div>
+        <div class="time" id="ID_5_08"></div>
+        <div class="time" id="ID_5_09"></div>
+        <div class="time" id="ID_5_10"></div>
+        <div class="time" id="ID_5_11"></div>
+        <div class="time" id="ID_5_12"></div>
+        <div class="time" id="ID_5_13"></div>
+        <div class="time" id="ID_5_14"></div>
+        <div class="time" id="ID_5_15"></div>
+        <div class="time" id="ID_5_16"></div>
+        <div class="time" id="ID_5_17"></div>
+        <div class="time" id="ID_5_18"></div>
+        <div class="time" id="ID_5_19"></div>
+        <div class="time" id="ID_5_20"></div>
+        <div class="time" id="ID_5_21"></div>
+        <div class="time" id="ID_5_22"></div>
+        <div class="time" id="ID_5_23"></div>
+        <div class="time" id="ID_5_24"></div>
+        <div class="time" id="ID_5_25"></div>
+        <div class="time" id="ID_5_26"></div>
+        <div class="time" id="ID_5_27"></div>
+        <div class="time" id="ID_5_28"></div>
+        <div class="time" id="ID_5_29"></div>
+        <div class="time" id="ID_5_30"></div>
+        <div class="time" id="ID_5_31"></div>
+    </div>
+<script src="~/js/site.js"></script>
