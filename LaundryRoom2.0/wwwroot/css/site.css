@@ -25,9 +25,10 @@
     height: 97px;
     width: 213px;
 }
+  
 
 .time {
-    background-image: url('/images/tom.jpg');
+  background-image: url('/images/tom.jpg');
     float: left;
     height: 97px;
     width: 71px;

@@ -16,27 +16,15 @@ namespace LaundryRoom20.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Booking>>GetBookings()
+        public async Task<IEnumerable<Booking>>GetBookings(string location)
         {
-            if (date.Hour == 12 && date.Minute == 06)
-            {
-                var yesterday = date.AddDays(-1);
-                await EraseBookings(yesterday.Date.Day.ToString());
-            }
-            return await _context.Booking.Where(b => b.Time != null).ToListAsync();
+            return await _context.Booking.Where(b => b.Time != null && b.User.Location == location).ToListAsync();
         }
 
-        public async Task<bool> CheckAddress(string address)
+        public async Task<string> CheckPass(Booking b)
         {
-            return await _context.User.AnyAsync
-                (u => u.ShortAddress == address);
-        }
-
-        public async Task<string> CheckPass(string address, string pass)
-        {
-            var user = await _context.User.Where(u => u.ShortAddress == address).FirstOrDefaultAsync();
-            if (!user.Password.Equals(CreateHash(pass, user.Salt)))
-                return null;
+            var user = await _context.User.Where(u => u.Password.Equals(CreateHash(b.User.Password, u.Salt)) &&
+            u.Location.Equals(b.User.Location)).FirstOrDefaultAsync();
             return user.BookerId;
         }
 
@@ -66,15 +54,6 @@ namespace LaundryRoom20.Services
             _booking.Time = booking.Time;
 
             return await _context.SaveChangesAsync();
-        }
-
-        private string CreateSalt(int size)
-        {
-            var rng = System.Security.Cryptography.RandomNumberGenerator.Create();
-            var buff = new byte[size];
-            rng.GetBytes(buff);
-            return Convert.ToBase64String(buff);
-
         }
 
         private string CreateHash(string input, string salt)

@@ -7,7 +7,6 @@ namespace LaundryRoom20.Models
 {
     public class Booking_Local
     {
-        public string BookerAddress { get; set; }
         public string BookerPass { get; set; }
         public string Time { get; set; }
     }

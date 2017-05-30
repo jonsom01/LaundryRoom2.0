@@ -19,5 +19,6 @@ namespace LaundryRoom20.Models
         public string Name { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
+        public string Location { get; set; }
     }
 }
