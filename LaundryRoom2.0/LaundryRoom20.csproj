@@ -149,7 +149,10 @@
     <Content Include="wwwroot\images\black.jpg" />
     <Content Include="wwwroot\images\date.png" />
     <Content Include="wwwroot\images\Datum.png" />
+    <Content Include="wwwroot\images\day2.png" />
+    <Content Include="wwwroot\images\day3.png" />
     <Content Include="wwwroot\images\erase.png" />
+    <Content Include="wwwroot\images\day1.png" />
     <Content Include="wwwroot\images\ok.png" />
     <Content Include="wwwroot\images\tom.JPG" />
     <Content Include="wwwroot\images\tur1.png" />

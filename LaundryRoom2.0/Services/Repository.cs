@@ -21,6 +21,16 @@ namespace LaundryRoom20.Services
             return await _context.Booking.Where(b => b.Time != null && b.User.Location == location).ToListAsync();
         }
 
+        public bool CheckLocation(string location)
+        {
+            return _context.Locations.Where(l => l.Name == location).Any();
+        }
+
+        public int NrOfDuplicates(string location)
+        {
+            return _context.Locations.Where(l => l.Name == location).FirstOrDefault().Duplicates;
+        }
+
         public async Task<string> CheckPass(Booking b)
         {
             var user = await _context.User.Where(u => u.Password.Equals(CreateHash(b.User.Password, u.Salt)) &&
@@ -50,7 +60,6 @@ namespace LaundryRoom20.Services
             var _booking = await _context.Booking.Where
                 (b => b.BookerId == booking.BookerId)
                 .FirstOrDefaultAsync();
-
             _booking.Time = booking.Time;
 
             return await _context.SaveChangesAsync();

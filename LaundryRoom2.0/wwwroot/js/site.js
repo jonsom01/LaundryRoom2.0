@@ -1,13 +1,28 @@
-﻿var inputText = "";
-var eraser = document.getElementById("eraser");
+﻿var eraser = document.getElementById("eraser");
+eraser.addEventListener("click", eraseNumber);
 var inputLabel = document.getElementById("numberInput");
 var isModal = false;
 var time;
-var loc = location.toString().substr(location.toString().lastIndexOf("/") + 1);
+var loc = location.toString().substr(10);
+
+loc = loc.substr(loc.indexOf("/") + 1);
+
+if (loc.indexOf("/") > -1)
+{
+    loc = loc.substr(0, loc.length - 2);
+}
+
 var timer = setInterval(update, 5000);
 var times = document.getElementsByClassName("time");
 var checkButton = document.getElementById("check");
 var buttons = document.getElementsByClassName("button");
+var numberPad = document.getElementById("numberPad");
+var days = document.getElementsByClassName("day");
+var dates = document.getElementsByClassName("date");
+var date = new Date();
+var currentDate = date.getDate();
+var daysChanged = false;
+document.getElementById("close").addEventListener("click", closeWindow);
 
 for (var i = 0; i < times.length; i++) {
     times[i].addEventListener("click", bookTime);
@@ -19,16 +34,29 @@ for (var i = 0; i < buttons.length; i++) {
 
 checkButton.addEventListener("click", sendBooking);
 
-window.onload = update;
+window.onload = function () {
+    update();
+}
+
+function closeWindow() {
+    numberPad.style.visibility = "hidden";
+    eraser.style.visibility = "hidden";
+    var wrapper = document.getElementById("wrapper");
+    wrapper.style.opacity = "1";
+    isModal = false;
+}
 
 function sendBooking(pass) {
+    var currTime = document.getElementById(time);
+    currTime.style.backgroundImage = 'url("http://laundryroom.azurewebsites.net/images/0000.png")';
+    currTime.style.opacity = .5;
     if (document.cookie === "") {
         pass = inputLabel.innerText;
     }
         var str = document.cookie;
-        var cookieTime = str.substr(str.lastIndexOf("e") + 4, 7);
+        var cookieTime = str.substr(str.lastIndexOf("e") + 4, 9);
         if (time === cookieTime) {
-            document.cookie = "myCookie= ; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+            document.cookie = "myCookie= ; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
             update();
         }
         else {
@@ -39,16 +67,17 @@ function sendBooking(pass) {
                 data: JSON.stringify(booking),
                 contentType: 'application/json',
             }).done(function () {
-                var numberPad = document.getElementById("numberPad");
                 numberPad.style.visibility = "hidden";
                 eraser.style.visibility = "hidden";
                 var wrapper = document.getElementById("wrapper");
                 checkButton.style.backgroundColor = "transparent";
                 wrapper.style.opacity = "1";
                 isModal = false;
-                var currTime = document.getElementById(time);
-                if (currTime.style.backgroundImage === 'url("images/tom.jpg")') {
-                    document.cookie = "myCookie=" + JSON.stringify({ currentTime: time, password: pass });
+                if (currTime.style.backgroundImage === 'url(http://laundryroom.azurewebsites.net/images/tom.jpg)' ||
+                    currTime.style.backgroundImage === 'url("http://laundryroom.azurewebsites.net/images/tom.jpg")' ||
+                    currTime.style.backgroundImage === 'url("http://laundryroom.azurewebsites.net/images/0000.png")' ||
+                    currTime.style.backgroundImage === 'url(http://laundryroom.azurewebsites.net/images/0000.png)') {
+                    document.cookie = "myCookie=" + JSON.stringify({ currentTime: time, password: pass }) + ";expires=Thu, 01 Jan 2270 00:00:01 GMT; path=/";
                 }
                 update();
             }).fail(function () { checkButton.style.backgroundColor = "red"; })
@@ -64,16 +93,8 @@ function bookTime() {
             sendBooking(password);
         }
         else {
-            inputText = "";
             inputLabel.innerText = "";
             checkButton.style.backgroundColor = "transparent";
-            var numberPad = document.getElementById("numberPad");
-            numberPad.style.left = this.offsetLeft - 100;
-            window.scrollTo(this.offsetLeft - 600, 0);
-            if (this.offsetLeft > 2000) {
-                numberPad.style.left = this.offsetLeft - 400;
-                window.scrollTo(this.offsetLeft - 600, 0);
-            }
             numberPad.style.visibility = "visible";
             var wrapper = document.getElementById("wrapper");
             wrapper.style.opacity = "0.3";
@@ -81,7 +102,6 @@ function bookTime() {
         }
     }
     else {
-        var numberPad = document.getElementById("numberPad");
         numberPad.style.visibility = "hidden";
         eraser.style.visibility = "hidden";
         var wrapper = document.getElementById("wrapper");
@@ -90,24 +110,113 @@ function bookTime() {
     }
 }
 
+
+function daysChange() {
+    var day = date.getDay();
+
+    for (var i = 0; i < currentDate -1; i++)
+    {
+        day--;
+        if (day < 0)
+        {
+            day = 6;
+        }
+    }
+
+    var month = date.getMonth();
+    switch (month) {
+        case 0:
+        case 2:
+        case 4:
+        case 6:
+        case 7:
+        case 9:
+        case 11:
+            for (var i = 0; i < 31; i++) {
+                days[i].src = "http://laundryroom.azurewebsites.net/images/day" + day + ".png";
+                if (day < 6) {
+                    day++
+                }
+                else {
+                    day = 0;
+                }
+            }
+            break;
+        case 1:
+            if ((date.getFullYear() - 2016) % 4 === 0) {
+                for ( i = 0; i < 29; i++) {
+                    days[i].src = "http://laundryroom.azurewebsites.net/images/day" + day + ".png";
+                    if (day < 6) {
+                        day++
+                    }
+                    else {
+                        day = 0;
+                    }
+                }
+            }
+            else {
+                for ( i = 0; i < 28; i++) {
+                    days[i].src = "http://laundryroom.azurewebsites.net/images/day" + day + ".png";
+                    if (day < 6) {
+                        day++
+                    }
+                    else {
+                        day = 0;
+                    }
+
+                }
+
+            }
+            break;
+        default:
+            for (i = 0; i < 30; i++) {
+                days[i].src = "http://laundryroom.azurewebsites.net/images/day" + day + ".png";
+                if (day < 6) {
+                    day++
+                }
+                else {
+                    day = 0;
+                }
+                break;
+            }
+    }
+    daysChanged = true;
+  }
+
 function update() {
     var urlstring = "/api/booking?location=" + loc;
     $.get(urlstring, function (data) {
         var bookings = data;
 
+        if (daysChanged === false || currentDate !== date.getDate())
+        {
+            currentDate = date.getDate();
+            daysChange();
+        }
+    
         for (var i = 0; i < times.length; i++)
         {
-            times[i].style.backgroundImage = "url('images/tom.jpg')";
+            times[i].style.backgroundImage = 'url(http://laundryroom.azurewebsites.net/images/tom.jpg)';
+            times[i].style.opacity = 1;
             times[i].style.filter = "";
             times[i].style.boxShadow = "";
         }
         for (var j = 0; j < bookings.length; j++) {
             displayBookings(bookings[j].time, bookings[j].bookerId);
         }
+        dates[date.getDate() - 1].style.opacity = "0.5";
         if (document.cookie !== "") {
             var str = document.cookie;
-            var time = document.getElementById(str.substr(str.lastIndexOf("e") + 4, 7));
-            if (time.style.backgroundImage !== 'url("images/tom.jpg")') {
+            var time = document.getElementById(str.substr(str.lastIndexOf("e") + 4, 9));
+            if     (time.style.backgroundImage === 'url("http://laundryroom.azurewebsites.net/images/tom.jpg")' ||
+                    time.style.backgroundImage ===  'url(http://laundryroom.azurewebsites.net/images/tom.jpg)' ||
+                    time.style.backgroundImage === 'url(http://laundryroom.azurewebsites.net/images/0000.png)' ||
+                    time.style.backgroundImage === 'url("http://laundryroom.azurewebsites.net/images/0000.png")')
+            {
+                document.cookie = "myCookie= ; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
+                update();
+            }
+            else{
                 time.style.filter = "brightness(150%)";
                 time.style.boxShadow = "0px 0px 100px yellow";
             }
@@ -116,24 +225,23 @@ function update() {
 }
 
 function displayBookings(time, id) {
-
     var timeSlot = document.getElementById(time);
-    timeSlot.style.backgroundImage = "url('images/" + id + ".png')";
+    if (timeSlot !== null) {
+        timeSlot.style.opacity = 1;
+        timeSlot.style.backgroundImage = "url('http://laundryroom.azurewebsites.net/images/" + id + ".png')";
+    }
 }
 
 function inputNumber() {
     var btn = this;
     eraser.style.visibility = "visible";
-    inputText += btn.innerText;
-    inputLabel.innerText = inputText;
-    eraser.addEventListener("click", eraseNumber);
+    inputLabel.innerText += btn.innerText;
 }
 
 function eraseNumber() {
     checkButton.style.backgroundColor = "transparent";
-    inputText = inputText.substring(0, inputText.length - 1);
-    inputLabel.innerText = inputText;
-    if (inputText.length === 0) {
+    inputLabel.innerText = inputLabel.innerText.substring(0, inputLabel.innerText.length - 1);
+    if (inputLabel.innerText.length === 0) {
         eraser.style.visibility = "hidden";
     }
 }
