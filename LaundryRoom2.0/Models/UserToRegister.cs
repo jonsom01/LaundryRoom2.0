@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace LaundryRoom20.Models
 {
-    public class User
+    public class UserToRegister
     {
+        public string ErrorMessage { get; set; }
+
         [Key]
         [Required]
         [MinLength(4)]
@@ -18,6 +20,7 @@ namespace LaundryRoom20.Models
         [MaxLength(50)]
         [Required]
         public string Address { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
         [Required]
         public string Name { get; set; }
@@ -26,7 +29,10 @@ namespace LaundryRoom20.Models
         public string Salt { get; set; }
         [Required]
         public string Location { get; set; }
-        public bool EmailConfirmed { get; set; }
-        public string MailConfirmationCode { get; set; }
+
+        public UserToRegister()
+        {
+            ErrorMessage = "";
+        }
     }
 }

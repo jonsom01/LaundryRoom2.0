@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "_Layout";
+}
+<body>
+    <link href="~/css/forms.css" rel="stylesheet" />
+    <div id="main" class="container">
+        <h2>Din pin-kod har uppdaterats!</h2>
+        <hr />
+        <h3>Din nya kod har skickats i ett mail till dig! Om du inte hittar mailet - kolla skräpposten!</h3>
+    </div>
+</body>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

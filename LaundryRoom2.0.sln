@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.0
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaundryRoom20", "LaundryRoom2.0\LaundryRoom20.csproj", "{86D82A96-EB7E-4DCB-8F68-022D7C1B9703}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaundryRoom20", "LaundryRoom2.0\LaundryRoom20.csproj", "{86D82A96-EB7E-4DCB-8F68-022D7C1B9703}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40194BDA-1FF7-41AB-871C-3B3038B24F23}
 	EndGlobalSection
 EndGlobal

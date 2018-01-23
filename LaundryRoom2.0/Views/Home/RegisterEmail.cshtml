@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model LaundryRoom20.Models.UserForEmailRegistration
+<body>
+    <link href="~/css/forms.css" rel="stylesheet" />
+    <div id="main" class="container">
+        <h2>Registrera din E-postaddress:</h2>
+        <form asp-action="EmailRegistered">
+            <div class="form-horizontal">
+                <hr />
+                <label class="text-danger">@Html.DisplayFor(model => model.ErrorMessage)</label>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Lägenhetsnummer</label>
+                    <div class="col-md-10">
+                        <input asp-for="BookerId" class="form-control" />
+                        <span asp-validation-for="BookerId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Pin-kod</label>
+                    <div class="col-md-10">
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">E-postadress</label>
+                    <div class="col-md-10">
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Registrera" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</body>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+

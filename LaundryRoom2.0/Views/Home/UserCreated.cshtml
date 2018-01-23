@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model LaundryRoom20.Models.User
+<body>
+    <link href="~/css/forms.css" rel="stylesheet" />
+    <div id="main" class="container">
+        <h2>En ny användare har skapats</h2>
+        <hr />
+        <h3>Pin-koden för @Html.DisplayFor(model => model.Name) är: @Html.DisplayFor(model => model.Password)</h3>
+
+    </div>
+</body>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

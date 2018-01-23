@@ -4,17 +4,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LaundryRoom20.Migrations
 {
-    public partial class Password : Migration
+    public partial class mailConfirm : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Password",
+            migrationBuilder.AddColumn<bool>(
+                name: "EmailConfirmed",
                 table: "User",
-                nullable: true);
+                nullable: false,
+                defaultValue: false);
 
             migrationBuilder.AddColumn<string>(
-                name: "Salt",
+                name: "MailConfirmationCode",
                 table: "User",
                 nullable: true);
         }
@@ -22,11 +23,11 @@ namespace LaundryRoom20.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Password",
+                name: "EmailConfirmed",
                 table: "User");
 
             migrationBuilder.DropColumn(
-                name: "Salt",
+                name: "MailConfirmationCode",
                 table: "User");
         }
     }

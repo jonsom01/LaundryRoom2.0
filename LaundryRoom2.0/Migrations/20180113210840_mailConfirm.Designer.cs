@@ -8,9 +8,10 @@ using LaundryRoom20.Models;
 namespace LaundryRoom20.Migrations
 {
     [DbContext(typeof(LaundryRoomContext))]
-    partial class LaundryRoomContextModelSnapshot : ModelSnapshot
+    [Migration("20180113210840_mailConfirm")]
+    partial class mailConfirm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

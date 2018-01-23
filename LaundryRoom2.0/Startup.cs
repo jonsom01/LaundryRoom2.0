@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using LaundryRoom20.Models;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,34 @@ namespace LaundryRoom20
         {
             var connectionString = Startup.Configuration["connectionstrings:DefaultConnection"];
             // Add framework services.
-            services.AddMvc();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<LaundryRoomContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+
+                // Cookie settings
+                options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(150);
+                options.Cookies.ApplicationCookie.LoginPath = "/Account/LogIn";
+                options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOut";
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.AddMvc();  
             services.AddScoped<Repository>();
             services.AddDbContext<LaundryRoomContext>(o => o.UseSqlServer(connectionString));
         }
@@ -51,7 +79,20 @@ namespace LaundryRoom20
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Models.UserToRegister, Models.User>();
+                cfg.CreateMap<Models.User, Models.UserToRegister>();
+                cfg.CreateMap<Models.UserForEmailRegistration, Models.User>();
+                cfg.CreateMap<Models.User, Models.UserForEmailRegistration>();
+                cfg.CreateMap<Models.UserRequestPin, Models.User>();
+                cfg.CreateMap<Models.User, Models.UserRequestPin>();
+
+            });
+
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {

@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "_Layout";
+}
+<body>
+    <link href="~/css/forms.css" rel="stylesheet" />
+    <div id="main" class="container">
+        <h2>E-postadressen har registrerats!</h2>
+        <hr />
+        <h3>Klicka på länken i mailet vi skickat för att bekräfta din E-postadress. <br/>Om du inte hittar mailet - kolla i skräpposten</h3>
+    </div>
+</body>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

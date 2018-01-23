@@ -1,170 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <ApplicationInsightsResourceId>/subscriptions/8b8329f4-f69c-4aea-86f4-97a6264e6b1f/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/LaundryRoom20</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/8b8329f4-f69c-4aea-86f4-97a6264e6b1f/resourceGroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/LaundryRoom20</ApplicationInsightsAnnotationResourceId>
+    <StartupObject>LaundryRoom20.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Remove="wwwroot/images\Datum - Kopia.png" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <Content Include="wwwroot\images\0001.png" />
-    <Content Include="wwwroot\images\0002.png" />
-    <Content Include="wwwroot\images\0003.png" />
-    <Content Include="wwwroot\images\0004.png" />
-    <Content Include="wwwroot\images\0005.png" />
-    <Content Include="wwwroot\images\0006.png" />
-    <Content Include="wwwroot\images\0007.png" />
-    <Content Include="wwwroot\images\0008.png" />
-    <Content Include="wwwroot\images\0009.png" />
-    <Content Include="wwwroot\images\0010.png" />
-    <Content Include="wwwroot\images\0011.png" />
-    <Content Include="wwwroot\images\0012.png" />
-    <Content Include="wwwroot\images\0013.png" />
-    <Content Include="wwwroot\images\0014.png" />
-    <Content Include="wwwroot\images\0015.png" />
-    <Content Include="wwwroot\images\0016.png" />
-    <Content Include="wwwroot\images\0017.png" />
-    <Content Include="wwwroot\images\0018.png" />
-    <Content Include="wwwroot\images\0019.png" />
-    <Content Include="wwwroot\images\0020.png" />
-    <Content Include="wwwroot\images\0021.png" />
-    <Content Include="wwwroot\images\0022.png" />
-    <Content Include="wwwroot\images\0023.png" />
-    <Content Include="wwwroot\images\0024.png" />
-    <Content Include="wwwroot\images\0025.png" />
-    <Content Include="wwwroot\images\0026.png" />
-    <Content Include="wwwroot\images\0027.png" />
-    <Content Include="wwwroot\images\0028.png" />
-    <Content Include="wwwroot\images\0029.png" />
-    <Content Include="wwwroot\images\0030.png" />
-    <Content Include="wwwroot\images\0031.png" />
-    <Content Include="wwwroot\images\0032.png" />
-    <Content Include="wwwroot\images\0033.png" />
-    <Content Include="wwwroot\images\0034.png" />
-    <Content Include="wwwroot\images\0035.png" />
-    <Content Include="wwwroot\images\0036.png" />
-    <Content Include="wwwroot\images\0037.png" />
-    <Content Include="wwwroot\images\0038.png" />
-    <Content Include="wwwroot\images\0039.png" />
-    <Content Include="wwwroot\images\0040.png" />
-    <Content Include="wwwroot\images\0041.png" />
-    <Content Include="wwwroot\images\0042.png" />
-    <Content Include="wwwroot\images\0043.png" />
-    <Content Include="wwwroot\images\0044.png" />
-    <Content Include="wwwroot\images\0045.png" />
-    <Content Include="wwwroot\images\0046.png" />
-    <Content Include="wwwroot\images\0047.png" />
-    <Content Include="wwwroot\images\0048.png" />
-    <Content Include="wwwroot\images\0049.png" />
-    <Content Include="wwwroot\images\0050.png" />
-    <Content Include="wwwroot\images\0051.png" />
-    <Content Include="wwwroot\images\0052.png" />
-    <Content Include="wwwroot\images\0053.png" />
-    <Content Include="wwwroot\images\0054.png" />
-    <Content Include="wwwroot\images\0055.png" />
-    <Content Include="wwwroot\images\0056.png" />
-    <Content Include="wwwroot\images\0057.png" />
-    <Content Include="wwwroot\images\0058.png" />
-    <Content Include="wwwroot\images\0059.png" />
-    <Content Include="wwwroot\images\0060.png" />
-    <Content Include="wwwroot\images\0061.png" />
-    <Content Include="wwwroot\images\0062.png" />
-    <Content Include="wwwroot\images\0063.png" />
-    <Content Include="wwwroot\images\0064.png" />
-    <Content Include="wwwroot\images\0065.png" />
-    <Content Include="wwwroot\images\0066.png" />
-    <Content Include="wwwroot\images\0067.png" />
-    <Content Include="wwwroot\images\0068.png" />
-    <Content Include="wwwroot\images\0069.png" />
-    <Content Include="wwwroot\images\0070.png" />
-    <Content Include="wwwroot\images\0071.png" />
-    <Content Include="wwwroot\images\0072.png" />
-    <Content Include="wwwroot\images\0073.png" />
-    <Content Include="wwwroot\images\0074.png" />
-    <Content Include="wwwroot\images\0075.png" />
-    <Content Include="wwwroot\images\0076.png" />
-    <Content Include="wwwroot\images\0077.png" />
-    <Content Include="wwwroot\images\0078.png" />
-    <Content Include="wwwroot\images\0079.png" />
-    <Content Include="wwwroot\images\0080.png" />
-    <Content Include="wwwroot\images\0081.png" />
-    <Content Include="wwwroot\images\0082.png" />
-    <Content Include="wwwroot\images\0083.png" />
-    <Content Include="wwwroot\images\0084.png" />
-    <Content Include="wwwroot\images\0085.png" />
-    <Content Include="wwwroot\images\0086.png" />
-    <Content Include="wwwroot\images\0087.png" />
-    <Content Include="wwwroot\images\0088.png" />
-    <Content Include="wwwroot\images\0089.png" />
-    <Content Include="wwwroot\images\0090.png" />
-    <Content Include="wwwroot\images\0091.png" />
-    <Content Include="wwwroot\images\0092.png" />
-    <Content Include="wwwroot\images\0093.png" />
-    <Content Include="wwwroot\images\0094.png" />
-    <Content Include="wwwroot\images\0095.png" />
-    <Content Include="wwwroot\images\0096.png" />
-    <Content Include="wwwroot\images\0097.png" />
-    <Content Include="wwwroot\images\0098.png" />
-    <Content Include="wwwroot\images\0099.png" />
-    <Content Include="wwwroot\images\0100.png" />
-    <Content Include="wwwroot\images\1.png" />
-    <Content Include="wwwroot\images\10.png" />
-    <Content Include="wwwroot\images\11.png" />
-    <Content Include="wwwroot\images\12.png" />
-    <Content Include="wwwroot\images\13.png" />
-    <Content Include="wwwroot\images\14.png" />
-    <Content Include="wwwroot\images\15.png" />
-    <Content Include="wwwroot\images\16.png" />
-    <Content Include="wwwroot\images\17.png" />
-    <Content Include="wwwroot\images\18.png" />
-    <Content Include="wwwroot\images\19.png" />
-    <Content Include="wwwroot\images\2.png" />
-    <Content Include="wwwroot\images\20.png" />
-    <Content Include="wwwroot\images\21.png" />
-    <Content Include="wwwroot\images\22.png" />
-    <Content Include="wwwroot\images\23.png" />
-    <Content Include="wwwroot\images\24.png" />
-    <Content Include="wwwroot\images\25.png" />
-    <Content Include="wwwroot\images\26.png" />
-    <Content Include="wwwroot\images\27.png" />
-    <Content Include="wwwroot\images\28.png" />
-    <Content Include="wwwroot\images\29.png" />
-    <Content Include="wwwroot\images\3.png" />
-    <Content Include="wwwroot\images\30.png" />
-    <Content Include="wwwroot\images\31.png" />
-    <Content Include="wwwroot\images\4.png" />
-    <Content Include="wwwroot\images\5.png" />
-    <Content Include="wwwroot\images\6.png" />
-    <Content Include="wwwroot\images\7.png" />
-    <Content Include="wwwroot\images\8.png" />
-    <Content Include="wwwroot\images\9.png" />
-    <Content Include="wwwroot\images\black.jpg" />
-    <Content Include="wwwroot\images\date.png" />
-    <Content Include="wwwroot\images\Datum.png" />
-    <Content Include="wwwroot\images\day2.png" />
-    <Content Include="wwwroot\images\day3.png" />
-    <Content Include="wwwroot\images\erase.png" />
-    <Content Include="wwwroot\images\day1.png" />
-    <Content Include="wwwroot\images\ok.png" />
-    <Content Include="wwwroot\images\tom.JPG" />
-    <Content Include="wwwroot\images\tur1.png" />
-    <Content Include="wwwroot\images\tur2.png" />
-    <Content Include="wwwroot\images\tur3.png" />
-    <Content Include="wwwroot\images\tur4.png" />
-    <Content Include="wwwroot\images\tur5.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" />
@@ -172,6 +28,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
+    <PackageReference Include="Sendgrid" Version="9.9.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />

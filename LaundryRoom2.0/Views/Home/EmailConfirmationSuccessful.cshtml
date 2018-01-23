@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<body>
+    <link href="~/css/forms.css" rel="stylesheet" />
+    <div id="main" class="container">
+        <h2>Email confirmation successful!</h2>
+        <hr />
+    </div>
+</body>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

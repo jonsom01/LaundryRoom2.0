@@ -36,7 +36,7 @@ checkButton.addEventListener("click", sendBooking);
 
 window.onload = function () {
     update();
-}
+};
 
 function closeWindow() {
     numberPad.style.visibility = "hidden";
@@ -48,12 +48,12 @@ function closeWindow() {
 
 function sendBooking(pass) {
     var currTime = document.getElementById(time);
-    currTime.style.backgroundImage = 'url("http://laundryroom.azurewebsites.net/images/0000.png")';
+    currTime.style.backgroundImage = 'url("http://laundryroom2.azurewebsites.net/images/0000.png")';
     currTime.style.opacity = .5;
-    if (document.cookie === "") {
+    if (document.cookie.indexOf("myCookie") === -1) {
         pass = inputLabel.innerText;
     }
-        var str = document.cookie;
+    var str = document.cookie.substr(document.cookie.lastIndexOf("myCookie"));
         var cookieTime = str.substr(str.lastIndexOf("e") + 4, 9);
         if (time === cookieTime) {
             document.cookie = "myCookie= ; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
@@ -65,7 +65,7 @@ function sendBooking(pass) {
                 type: "PUT",
                 url: "/api/booking",
                 data: JSON.stringify(booking),
-                contentType: 'application/json',
+                contentType: 'application/json'
             }).done(function () {
                 numberPad.style.visibility = "hidden";
                 eraser.style.visibility = "hidden";
@@ -73,21 +73,21 @@ function sendBooking(pass) {
                 checkButton.style.backgroundColor = "transparent";
                 wrapper.style.opacity = "1";
                 isModal = false;
-                if (currTime.style.backgroundImage === 'url(http://laundryroom.azurewebsites.net/images/tom.jpg)' ||
-                    currTime.style.backgroundImage === 'url("http://laundryroom.azurewebsites.net/images/tom.jpg")' ||
-                    currTime.style.backgroundImage === 'url("http://laundryroom.azurewebsites.net/images/0000.png")' ||
-                    currTime.style.backgroundImage === 'url(http://laundryroom.azurewebsites.net/images/0000.png)') {
+                if (currTime.style.backgroundImage === 'url(http://laundryroom2.azurewebsites.net/images/tom.jpg)' ||
+                    currTime.style.backgroundImage === 'url("http://laundryroom2.azurewebsites.net/images/tom.jpg")' ||
+                    currTime.style.backgroundImage === 'url("http://laundryroom2.azurewebsites.net/images/0000.png")' ||
+                    currTime.style.backgroundImage === 'url(http://laundryroom2.azurewebsites.net/images/0000.png)') {
                     document.cookie = "myCookie=" + JSON.stringify({ currentTime: time, password: pass }) + ";expires=Thu, 01 Jan 2270 00:00:01 GMT; path=/";
                 }
                 update();
-            }).fail(function () { checkButton.style.backgroundColor = "red"; })
+            }).fail(function () { checkButton.style.backgroundColor = "red"; });
     }
 }
 
 function bookTime() {
     if (!isModal) {
         time = this.id;
-        if (document.cookie !== "") {
+        if (document.cookie.indexOf("myCookie") !== -1) {
             var str = document.cookie;
             var password = str.substr(str.lastIndexOf(":") + 2, 4);
             sendBooking(password);
@@ -132,10 +132,10 @@ function daysChange() {
         case 7:
         case 9:
         case 11:
-            for (var i = 0; i < 31; i++) {
-                days[i].src = "http://laundryroom.azurewebsites.net/images/day" + day + ".png";
+            for (i = 0; i < 31; i++) {
+                days[i].src = "http://laundryroom2.azurewebsites.net/images/day" + day + ".png";
                 if (day < 6) {
-                    day++
+                    day++;
                 }
                 else {
                     day = 0;
@@ -145,9 +145,9 @@ function daysChange() {
         case 1:
             if ((date.getFullYear() - 2016) % 4 === 0) {
                 for ( i = 0; i < 29; i++) {
-                    days[i].src = "http://laundryroom.azurewebsites.net/images/day" + day + ".png";
+                    days[i].src = "http://laundryroom2.azurewebsites.net/images/day" + day + ".png";
                     if (day < 6) {
-                        day++
+                        day++;
                     }
                     else {
                         day = 0;
@@ -156,9 +156,9 @@ function daysChange() {
             }
             else {
                 for ( i = 0; i < 28; i++) {
-                    days[i].src = "http://laundryroom.azurewebsites.net/images/day" + day + ".png";
+                    days[i].src = "http://laundryroom2.azurewebsites.net/images/day" + day + ".png";
                     if (day < 6) {
-                        day++
+                        day++;
                     }
                     else {
                         day = 0;
@@ -170,9 +170,9 @@ function daysChange() {
             break;
         default:
             for (i = 0; i < 30; i++) {
-                days[i].src = "http://laundryroom.azurewebsites.net/images/day" + day + ".png";
+                days[i].src = "http://laundryroom2.azurewebsites.net/images/day" + day + ".png";
                 if (day < 6) {
-                    day++
+                    day++;
                 }
                 else {
                     day = 0;
@@ -196,7 +196,7 @@ function update() {
     
         for (var i = 0; i < times.length; i++)
         {
-            times[i].style.backgroundImage = 'url(http://laundryroom.azurewebsites.net/images/tom.jpg)';
+            times[i].style.backgroundImage = 'url(http://laundryroom2.azurewebsites.net/images/tom.jpg)';
             times[i].style.opacity = 1;
             times[i].style.filter = "";
             times[i].style.boxShadow = "";
@@ -208,10 +208,10 @@ function update() {
         if (document.cookie !== "") {
             var str = document.cookie;
             var time = document.getElementById(str.substr(str.lastIndexOf("e") + 4, 9));
-            if     (time.style.backgroundImage === 'url("http://laundryroom.azurewebsites.net/images/tom.jpg")' ||
-                    time.style.backgroundImage ===  'url(http://laundryroom.azurewebsites.net/images/tom.jpg)' ||
-                    time.style.backgroundImage === 'url(http://laundryroom.azurewebsites.net/images/0000.png)' ||
-                    time.style.backgroundImage === 'url("http://laundryroom.azurewebsites.net/images/0000.png")')
+            if     (time.style.backgroundImage === 'url("http://laundryroom2.azurewebsites.net/images/tom.jpg")' ||
+                    time.style.backgroundImage ===  'url(http://laundryroom2.azurewebsites.net/images/tom.jpg)' ||
+                    time.style.backgroundImage === 'url(http://laundryroom2.azurewebsites.net/images/0000.png)' ||
+                    time.style.backgroundImage === 'url("http://laundryroom2.azurewebsites.net/images/0000.png")')
             {
                 document.cookie = "myCookie= ; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
                 update();
@@ -228,7 +228,7 @@ function displayBookings(time, id) {
     var timeSlot = document.getElementById(time);
     if (timeSlot !== null) {
         timeSlot.style.opacity = 1;
-        timeSlot.style.backgroundImage = "url('http://laundryroom.azurewebsites.net/images/" + id + ".png')";
+        timeSlot.style.backgroundImage = "url('http://laundryroom2.azurewebsites.net/images/" + id + ".png')";
     }
 }
 

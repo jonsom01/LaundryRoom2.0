@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LaundryRoom20.Models
 {
-    public class LaundryRoomContext : DbContext
+    public class LaundryRoomContext : IdentityDbContext<ApplicationUser>
     {
         public LaundryRoomContext(DbContextOptions<LaundryRoomContext> options) : base(options)
         {
