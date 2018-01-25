@@ -24,7 +24,7 @@ namespace LaundryRoom20.Controllers
         {
             _context = context;
             _repository = repository;
-            apiKey = "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";
+            apiKey = "";
 
         }
 
