@@ -8,8 +8,8 @@ using LaundryRoom20.Models;
 namespace LaundryRoom20.Migrations
 {
     [DbContext(typeof(LaundryRoomContext))]
-    [Migration("20180113210840_mailConfirm")]
-    partial class mailConfirm
+    [Migration("20180128143600_06")]
+    partial class _06
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,9 +78,11 @@ namespace LaundryRoom20.Migrations
 
                     b.Property<string>("Time");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BookerId")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Booking");
@@ -100,13 +102,16 @@ namespace LaundryRoom20.Migrations
 
             modelBuilder.Entity("LaundryRoom20.Models.User", b =>
                 {
-                    b.Property<string>("BookerId")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(4);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("BookerId")
+                        .IsRequired()
+                        .HasMaxLength(4);
 
                     b.Property<string>("Email");
 
@@ -125,7 +130,7 @@ namespace LaundryRoom20.Migrations
 
                     b.Property<string>("Salt");
 
-                    b.HasKey("BookerId");
+                    b.HasKey("Id");
 
                     b.ToTable("User");
                 });
@@ -241,7 +246,8 @@ namespace LaundryRoom20.Migrations
                 {
                     b.HasOne("LaundryRoom20.Models.User", "User")
                         .WithOne("Booking")
-                        .HasForeignKey("LaundryRoom20.Models.Booking", "BookerId");
+                        .HasForeignKey("LaundryRoom20.Models.Booking", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

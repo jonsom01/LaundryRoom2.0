@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using LaundryRoom20.Models;
 using Microsoft.EntityFrameworkCore;
 using LaundryRoom20.Services;
+using System.Net.Http;
 
 namespace LaundryRoom20.Api
 {
@@ -28,20 +29,19 @@ namespace LaundryRoom20.Api
             return await _repository.GetBookings(location);
         }
 
-        // POST api/values
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] Booking booking)
         {
             var bookings = await _repository.GetBookings(booking.User.Location);
-            booking.BookerId = await _repository.CheckPass(booking);
-            if (booking.BookerId == null)
+            booking.User = await _repository.CheckPass(booking);
+            if (booking.User == null)
                 return NotFound();
 
             var matchingBooking = bookings.Where(b => b.Time == booking.Time).FirstOrDefault();
 
             if (matchingBooking != null)
             {
-                if (matchingBooking.BookerId == booking.BookerId)
+                if (matchingBooking.User.Id== booking.User.Id)
                 {
                     if (await _repository.EraseBooking(matchingBooking) >= 0)
                         return NoContent();
@@ -50,8 +50,8 @@ namespace LaundryRoom20.Api
                 return NotFound();
             }
             if (await _repository.UpdateBooking(booking) >= 0)
-                return NoContent();
-            return StatusCode(500, "Something bad happended");
+                                return NoContent();
+                return StatusCode(500, "Something bad happended");
         }
 
     }

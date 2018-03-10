@@ -124,7 +124,9 @@ namespace LaundryRoom20.Services
         public async Task<string> CreateUser(User user, String pass)
             {
             var errorMessage = "";
-            var booking = new Booking() { BookerId = user.BookerId };
+            var booking = new Booking();
+            user.Booking = booking;
+            booking.User = user;
             user.Salt = CreateSalt(20);
             user.Password = CreateHash(pass, user.Salt);
             
@@ -158,22 +160,11 @@ namespace LaundryRoom20.Services
             return _context.Locations.Where(l => l.Name == location).FirstOrDefault().Duplicates;
         }
 
-        public async Task<string> CheckPass(Booking b)
+        public async Task<User> CheckPass(Booking b)
         {      
             var user = await _context.User.Where(u => u.Password.Equals(CreateHash(b.User.Password, u.Salt)) &&
             u.Location.Equals(b.User.Location)).FirstOrDefaultAsync();
-            return user.BookerId;
-        }
-
-        private async Task <int> EraseBookings(string date)
-        {
-            var bookings = await _context.Booking.Where(b => b.Time.Contains(date)).ToListAsync();
-            foreach (var booking in bookings)
-            {
-                booking.Time = null;
-            }
-
-            return await _context.SaveChangesAsync();
+            return user;
         }
 
         public async Task<int> EraseBooking(Booking booking)
@@ -185,9 +176,10 @@ namespace LaundryRoom20.Services
         public async Task<int> UpdateBooking(Booking booking)
         {
             var _booking = await _context.Booking.Where
-                (b => b.BookerId == booking.BookerId)
+                (b => b.User.Id == booking.User.Id)
                 .FirstOrDefaultAsync();
             _booking.Time = booking.Time;
+            _booking.BookerId = booking.User.BookerId;
 
             return await _context.SaveChangesAsync();
         }

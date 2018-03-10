@@ -1,15 +1,18 @@
-﻿#bla {
-    float: right;
-}
-
+﻿
 .navbar-nav {
     margin-top: .75%;
 
 }
 
+#navbar-right {
+    float: right;
+}
+
+
 p {
+    margin: 2vw;
     font-size: 2vw;
-    font-family: Garamond;
+    font-family: 'Didact Gothic', sans-serif;
 }
 
 #foot {
@@ -24,7 +27,7 @@ p {
     padding-top: 9px;
     padding-right: 10px;
     padding-bottom: 9px;
-    padding-left: 10px;
+    padding-left: 1vw;
     margin-top: 8px;
     margin-right: 15px;
     margin-bottom: 8px;
@@ -72,124 +75,70 @@ textarea {
 #header {
     z-index: -1;
     position: absolute;
-    top: 0;
-
+    top: 5vw;
+    opacity: .4;
 }
 
 #hhh {
-    padding: 60px;
+    padding: 5vw;
 }
 
 
 
 h1 {
-    margin: 2vw;
+    text-align: center;
     margin-top: 10vw;
     z-index: 1;
-    font-family: 'Global Sans Serif';
-    font-size: 2vw;
-    color: white;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bolder;
+    font-size: 6vw;
+    color: black;
 }
 
-@media screen and (max-width: 480px) {
+#smaller {
+    margin-top: 0;
+    margin-bottom: 5vw;
+    font-size: 4vw;
+}
 
-    body {
-        padding-top: 10vw;
-    }
+@media screen and (max-width: 775px) {
 
-    h1 {
-        margin-top: 22vw;
-        font-family: 'Edwardian Script ITC';
-        font-size: 12vw;
+    h1{
+        margin-top: 15vw;
     }
 
     #wash {
-        margin-top: 4px;
-        height: 40px;
+        padding-left: 3vw;
     }
 
-    #hhh {
-        margin-top: 0;
-        padding: 0;
+    #foot {
+        height: 140px;
     }
-
+    #header {
+        top: 7vw;
+    }
+    #h1cont {
+        top: 20vw;
+    }
 }
 
-@media screen and (max-width: 550px) {
 
-    body {
-        padding-top: 7vw;
-    }
 
-    #hhh {
-        margin-top: 5px;
-        padding: 5px;
-    }
-
+@media screen and (max-width: 530px) {
     h1 {
-        margin-top: 16vw;
-        font-family: 'Edwardian Script ITC';
-        font-size: 12vw;
+        margin-top: 20vw;
     }
+}
 
+@media screen and (max-width: 380px) {
+    h1 {
+        margin-top: 25vw;
+    }
     #wash {
-        height: 50px;
-    }
-
-    .navbar {
         padding-left: 6vw;
     }
-
+    #header {
+        top: 13vw;
+    }
 }
-
-@media screen and (max-width: 850px) {
-
-    h1 {
-        margin-top: 9vw;
-        font-family: 'Edwardian Script ITC';
-        font-size: 8vw;
-    }
-
-    #myNavbar {
-        font-size: 14px;
-    }
-
-    .navbar-brand {
-        font-size: 14px;
-    }
-
-}
-
-    @media screen and (max-width: 767px) {
-
-
-        body {
-            padding-top: 7vw;
-        }
-
-
-        #hhh {
-            margin-top: 10px;
-            padding: 10px;
-        }
-
-        h1 {
-            margin-top: 10vw;
-            font-family: 'Edwardian Script ITC';
-            font-size: 8vw;
-        }
-
-        #myNavbar {
-            font-size: 18px;
-        }
-
-        #foot {
-            height: 140px;
-        }
-
-        .navbar {
-            padding-left: 4vw;
-        }
-    }
-
 

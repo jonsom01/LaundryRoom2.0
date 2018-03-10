@@ -12,8 +12,9 @@ namespace LaundryRoom20.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [ForeignKey("BookerId")]
+        [ForeignKey("UserId")]
         public User User { get; set; }
+        public int UserId { get; set; }
         public string BookerId { get; set; }
         public string Time { get; set; }
     }

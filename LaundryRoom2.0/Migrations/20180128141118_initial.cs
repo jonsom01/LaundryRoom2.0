@@ -36,6 +36,19 @@ namespace LaundryRoom20.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Booking",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Time = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booking", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
@@ -45,23 +58,6 @@ namespace LaundryRoom20.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Locations", x => x.Name);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    BookerId = table.Column<string>(maxLength: 4, nullable: false),
-                    Address = table.Column<string>(maxLength: 50, nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    Location = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
-                    Salt = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.BookerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,22 +130,30 @@ namespace LaundryRoom20.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Booking",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BookerId = table.Column<string>(nullable: true),
-                    Time = table.Column<string>(nullable: true)
+                    Address = table.Column<string>(maxLength: 50, nullable: false),
+                    BookerId = table.Column<string>(maxLength: 4, nullable: false),
+                    BookingId = table.Column<int>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    Location = table.Column<string>(nullable: false),
+                    MailConfirmationCode = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    Salt = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Booking_User_BookerId",
-                        column: x => x.BookerId,
-                        principalTable: "User",
-                        principalColumn: "BookerId",
+                        name: "FK_User_Booking_BookingId",
+                        column: x => x.BookingId,
+                        principalTable: "Booking",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -210,10 +214,9 @@ namespace LaundryRoom20.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_BookerId",
-                table: "Booking",
-                column: "BookerId",
-                unique: true);
+                name: "IX_User_BookingId",
+                table: "User",
+                column: "BookingId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -245,10 +248,10 @@ namespace LaundryRoom20.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Booking");
+                name: "Locations");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -266,7 +269,7 @@ namespace LaundryRoom20.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Booking");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

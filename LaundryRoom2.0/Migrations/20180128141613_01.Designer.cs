@@ -8,9 +8,10 @@ using LaundryRoom20.Models;
 namespace LaundryRoom20.Migrations
 {
     [DbContext(typeof(LaundryRoomContext))]
-    partial class LaundryRoomContextModelSnapshot : ModelSnapshot
+    [Migration("20180128141613_01")]
+    partial class _01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -73,16 +74,9 @@ namespace LaundryRoom20.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BookerId");
-
                     b.Property<string>("Time");
 
-                    b.Property<int>("UserId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Booking");
                 });
@@ -104,32 +98,15 @@ namespace LaundryRoom20.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
                     b.Property<string>("BookerId")
                         .IsRequired()
                         .HasMaxLength(4);
 
-                    b.Property<string>("Email");
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("Location")
-                        .IsRequired();
-
-                    b.Property<string>("MailConfirmationCode");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("Password")
-                        .IsRequired();
-
-                    b.Property<string>("Salt");
+                    b.Property<int?>("BookingId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingId");
 
                     b.ToTable("User");
                 });
@@ -241,12 +218,11 @@ namespace LaundryRoom20.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LaundryRoom20.Models.Booking", b =>
+            modelBuilder.Entity("LaundryRoom20.Models.User", b =>
                 {
-                    b.HasOne("LaundryRoom20.Models.User", "User")
-                        .WithOne("Booking")
-                        .HasForeignKey("LaundryRoom20.Models.Booking", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("LaundryRoom20.Models.Booking", "Booking")
+                        .WithMany()
+                        .HasForeignKey("BookingId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

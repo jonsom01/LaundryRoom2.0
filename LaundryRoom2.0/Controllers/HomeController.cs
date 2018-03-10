@@ -16,16 +16,16 @@ namespace LaundryRoom20.Controllers
 {
     public class HomeController : Controller
     {
-        private Repository _repository;
+        //private Repository _repository;
         private LaundryRoomContext _context;
-        private string apiKey;
+        private AppSettings _appSettings;
+        private Repository _repository;
 
-        public HomeController(Repository repository, LaundryRoomContext context)
+        public HomeController(Repository repository, LaundryRoomContext context, AppSettings appSettings)
         {
             _context = context;
             _repository = repository;
-            apiKey = "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";
-
+            _appSettings = appSettings;
         }
 
 
@@ -77,25 +77,26 @@ namespace LaundryRoom20.Controllers
             }
 
             if (await _repository.EmailRegistered(userRequestPin))
+            {
+                var apiKey = _appSettings.ApiKey;
+                var newPin = await _repository.CreateAndSaveNewPin(dbUser);
+                var client = new SendGridClient(apiKey);
+                var msg = new SendGridMessage()
                 {
-                            
-                        var newPin = await _repository.CreateAndSaveNewPin(dbUser);
-                        var client = new SendGridClient(apiKey);
-                        var msg = new SendGridMessage()
-                        {
-                            From = new EmailAddress("jonsom01@hotmail.com", "Bokatvattstugan.se"),
-                            Subject = "Din nya pin-kod",
-                            HtmlContent = "<strong> Din nya pin-kod är: " + newPin
-                        };
-                        msg.AddTo(new EmailAddress(dbUser.Email, "Test User"));
-                        var response = await client.SendEmailAsync(msg);
-                        if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
-                        {
-                            return RedirectToAction("NewPincodeDelivered");
-                        }
-                       userRequestPin.ErrorMessage = "Email couldn't be delivered";
-                       return View("RequestNewPin", userRequestPin);
-                    }
+                    From = new EmailAddress("admin@bokatvattstugan.online", "Bokatvattstugan.online"),
+                    Subject = "Din nya pin-kod",
+                    HtmlContent = "<strong> Din nya pin-kod är: " + newPin,
+                    PlainTextContent = "Din nya pin-kod är: " + newPin
+                };
+                msg.AddTo(new EmailAddress(dbUser.Email));
+                var response = await client.SendEmailAsync(msg);
+                if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    return RedirectToAction("NewPincodeDelivered");
+                }
+                userRequestPin.ErrorMessage = "Email couldn't be delivered";
+                return View("RequestNewPin", userRequestPin);
+            }
             userRequestPin.ErrorMessage = "You have to register and confirm your Email-address";
             return View("RequestNewPin", userRequestPin);
         }
@@ -118,20 +119,23 @@ namespace LaundryRoom20.Controllers
 
         public async Task<IActionResult> SendConfirmationEmail(User user)
         {
+            var apiKey = _appSettings.ApiKey;
             if (user == null)
                 return View("Error");
             var emailCode = _repository.CreateSalt(20);
             var error = await _repository.SaveEmailConfirmationCode(emailCode, user);
-            var link = "http://localhost:50583/home/confirmEmail?code=" + emailCode;
+            var link = "https://bokatvattstugan.online/home/confirmEmail?code=" + emailCode;
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("jonsom01@hotmail.com", "Bokatvattstugan.se"),
+                From = new EmailAddress("admin@bokatvattstugan.online", "Bokatvattstugan.online"),
                 Subject = "E-postregistrering",
-                HtmlContent = "<strong>Tack för att du har registrerat din E-postadress hos bokatvattstugan.online! </strong><br/> <h1>Detta är en rubrik</h1>" +
-                              "<p>Tryck på <a href=" + link + "> länken </a>för att bekräfta adressen:"
+                HtmlContent = "<strong>Tack för att du har registrerat din E-postadress hos bokatvattstugan.online! </strong><br/>" +
+                              "<p>Tryck på <a href=" + link + "> länken </a>för att bekräfta adressen.",
+                PlainTextContent = "Tack för att du har registrerat din E-postadress hos bokatvattstugan.online!" +
+                              "följ länken: " + link + " för att bekräfta adressen."
             };
-            msg.AddTo(new EmailAddress(user.Email, "Test User"));
+            msg.AddTo(new EmailAddress(user.Email));
             var response = await client.SendEmailAsync(msg);
             if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
@@ -251,7 +255,7 @@ namespace LaundryRoom20.Controllers
                 userToRegister.ErrorMessage = String.Format("The operation failed - {0}!", mess);
                 return View("UserCreate", userToRegister);
             }
-     
+
         }
 
         [Route("/{location}")]
@@ -266,7 +270,7 @@ namespace LaundryRoom20.Controllers
 
         [Route("/{location}/1")]
         public IActionResult Index1(string location)
-      
+
         {
             if (_repository.CheckLocation(location) && _repository.NrOfDuplicates(location) >= 1)
                 return View("Room");

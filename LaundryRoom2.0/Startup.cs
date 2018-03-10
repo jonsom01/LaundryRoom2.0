@@ -32,6 +32,7 @@ namespace LaundryRoom20
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Startup.Configuration["connectionstrings:DefaultConnection"];
+
             // Add framework services.
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -60,7 +61,8 @@ namespace LaundryRoom20
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddMvc();  
+            services.AddMvc();
+            services.AddSingleton(Configuration.GetSection("AppSettings").Get<AppSettings>());
             services.AddScoped<Repository>();
             services.AddDbContext<LaundryRoomContext>(o => o.UseSqlServer(connectionString));
         }

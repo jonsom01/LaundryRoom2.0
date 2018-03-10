@@ -11,7 +11,7 @@ using LaundryRoom20.Models;
 
 namespace LaundryRoom20.Controllers
 {
-    
+
     public class AccountController : Controller
     {
         private LaundryRoomContext _context;
@@ -30,6 +30,15 @@ namespace LaundryRoom20.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+        }
+
+        public async Task<IActionResult> CreateAdmin()
+        {
+            var user = new ApplicationUser { Location = "mesosten", UserName = "Johan" };
+            user.Email = "johan.sjostrom@umea.se";
+            var result = await _userManager.AddPasswordAsync(user, "qwerty");
+            var res = await _userManager.CreateAsync(user);
+            return Ok();
         }
 
         public async Task<IActionResult> Login(LoginViewModel user)

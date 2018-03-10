@@ -8,8 +8,8 @@ using LaundryRoom20.Models;
 namespace LaundryRoom20.Migrations
 {
     [DbContext(typeof(LaundryRoomContext))]
-    [Migration("20180110073023_initial")]
-    partial class initial
+    [Migration("20180128141506_00")]
+    partial class _00
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,14 +74,9 @@ namespace LaundryRoom20.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BookerId");
-
                     b.Property<string>("Time");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookerId")
-                        .IsUnique();
 
                     b.ToTable("Booking");
                 });
@@ -100,28 +95,10 @@ namespace LaundryRoom20.Migrations
 
             modelBuilder.Entity("LaundryRoom20.Models.User", b =>
                 {
-                    b.Property<string>("BookerId")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(4);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Location")
-                        .IsRequired();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("Password")
-                        .IsRequired();
-
-                    b.Property<string>("Salt");
-
-                    b.HasKey("BookerId");
+                    b.HasKey("Id");
 
                     b.ToTable("User");
                 });
@@ -231,13 +208,6 @@ namespace LaundryRoom20.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("LaundryRoom20.Models.Booking", b =>
-                {
-                    b.HasOne("LaundryRoom20.Models.User", "User")
-                        .WithOne("Booking")
-                        .HasForeignKey("LaundryRoom20.Models.Booking", "BookerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

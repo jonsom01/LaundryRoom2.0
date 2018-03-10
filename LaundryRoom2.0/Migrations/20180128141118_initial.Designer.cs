@@ -8,9 +8,10 @@ using LaundryRoom20.Models;
 namespace LaundryRoom20.Migrations
 {
     [DbContext(typeof(LaundryRoomContext))]
-    partial class LaundryRoomContextModelSnapshot : ModelSnapshot
+    [Migration("20180128141118_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -73,16 +74,9 @@ namespace LaundryRoom20.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BookerId");
-
                     b.Property<string>("Time");
 
-                    b.Property<int>("UserId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Booking");
                 });
@@ -112,6 +106,8 @@ namespace LaundryRoom20.Migrations
                         .IsRequired()
                         .HasMaxLength(4);
 
+                    b.Property<int?>("BookingId");
+
                     b.Property<string>("Email");
 
                     b.Property<bool>("EmailConfirmed");
@@ -130,6 +126,8 @@ namespace LaundryRoom20.Migrations
                     b.Property<string>("Salt");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingId");
 
                     b.ToTable("User");
                 });
@@ -241,12 +239,11 @@ namespace LaundryRoom20.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LaundryRoom20.Models.Booking", b =>
+            modelBuilder.Entity("LaundryRoom20.Models.User", b =>
                 {
-                    b.HasOne("LaundryRoom20.Models.User", "User")
-                        .WithOne("Booking")
-                        .HasForeignKey("LaundryRoom20.Models.Booking", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("LaundryRoom20.Models.Booking", "Booking")
+                        .WithMany()
+                        .HasForeignKey("BookingId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
