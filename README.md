@@ -1,6 +1,6 @@
 # LaundryRoom2.0
 
-It's an application that handles bookings for a laundry room. It's designed to have an "analog" feeling. When you click on an empty space,and press your code, your "bolt" turns up in that space, and that means you've booked that time. To remove the 
+It's an application that handles bookings for a laundry room. It's designed to have an "analog" feeling. When you click on an empty space,and press your code, your "bolt" turns up in that space, and that means you've booked that time.
 
 Set up:
 
