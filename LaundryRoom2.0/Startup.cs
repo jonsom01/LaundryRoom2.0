@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using LaundryRoom20.Models;
 using Microsoft.EntityFrameworkCore;
 using LaundryRoom20.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace LaundryRoom20
 {
@@ -62,9 +64,18 @@ namespace LaundryRoom20
             });
 
             services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigins", 
+                    builder => builder.WithOrigins("https://www.bokatvattstugan.online", "http://laundryroom2.azurewebsites.net"));
+            });
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<AppSettings>());
             services.AddScoped<Repository>();
             services.AddDbContext<LaundryRoomContext>(o => o.UseSqlServer(connectionString));
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowOrigins"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

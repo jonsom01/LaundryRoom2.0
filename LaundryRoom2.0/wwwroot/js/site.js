@@ -163,9 +163,7 @@ function daysChange() {
                     else {
                         day = 0;
                     }
-
                 }
-
             }
             break;
         default:
@@ -177,7 +175,6 @@ function daysChange() {
                 else {
                     day = 0;
                 }
-                break;
             }
     }
     daysChanged = true;
