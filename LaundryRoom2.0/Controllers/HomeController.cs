@@ -228,9 +228,10 @@ namespace LaundryRoom20.Controllers
         [Route("/redirecttoroom")]
         public IActionResult RedirectToRoom()
         {
-            var locations = new Helper();
-
-            locations.Locations = _context.Locations.Select(l => l.Name).Distinct().ToList();
+            var locations = new Helper
+            {
+                Locations = _context.Locations.Select(l => l.Name).Distinct().ToList()
+            };
             return View(locations);
         }
 

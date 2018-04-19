@@ -124,6 +124,10 @@ namespace LaundryRoom20.Services
         public async Task<string> CreateUser(User user, String pass)
             {
             var errorMessage = "";
+            if (await CheckBookerId(user))
+            {
+                return "There already is a user with this BookerId";
+            }
             var booking = new Booking();
             user.Booking = booking;
             booking.User = user;

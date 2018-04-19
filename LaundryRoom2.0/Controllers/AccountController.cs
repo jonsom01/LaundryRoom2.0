@@ -58,7 +58,7 @@ namespace LaundryRoom20.Controllers
             if (result.Succeeded)
             {
                 var userLocation = new User { Location = appUser.Location };
-                return RedirectToAction("UserCreate", "Home", userLocation);
+                return RedirectToAction("usercreate", "home", userLocation);
             }
             else
             {
